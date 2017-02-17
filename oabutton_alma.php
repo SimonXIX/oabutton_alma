@@ -7,11 +7,11 @@
 # @acknowledgements: 
 ?>
 <?php
-    #define variables and fix the input from the form before sending it to XML
+    #define variables
     $almaurl="https://api-eu.hosted.exlibrisgroup.com";
     $apikey="xxxxxxxxxxxxxx";
     
-    #read Json from file provided by OA Button
+    #read Json from file POSTed by OA Button
     $json = json_decode(file_get_contents('php://input'), true);
 
     #search Alma for the user's email address and retrieve username
@@ -57,4 +57,5 @@
     curl_close($ch);
 
     var_dump($response);
+
 ?>
