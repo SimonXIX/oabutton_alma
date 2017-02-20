@@ -15,12 +15,12 @@
     $json = json_decode(file_get_contents('php://input'), true);
 
     #search Alma for the user's email address and retrieve username
-    $ch = curl_init();
     $url = $almaurl.'/almaws/v1/users/';
     $queryParams = '?' . urlencode('limit') . '=' . urlencode('10') . '&' . urlencode('offset') . '=' . urlencode('0') . '&' . urlencode('q') . '=' . urlencode('email~') . $json['id'] . '&' . urlencode('order_by') . '=' . urlencode('last_name, first_name, primary_id') . '&' . urlencode('apikey') . '=' . urlencode($apikey);
     $fullurl = $url.$queryParams;
     
     #GET using cURL
+    #$ch = curl_init();
     #curl_setopt($ch, CURLOPT_URL, $fullurl);
     #curl_setopt($ch, CURLOPT_RETURNTRANSFER, TRUE);
     #curl_setopt($ch, CURLOPT_HEADER, FALSE);
@@ -34,7 +34,6 @@
             'method'  => 'GET'));
     $context  = stream_context_create($stream_options);
     $response = file_get_contents($fullurl, null, $context);
-    print $response;
     
     $user_xml = new SimpleXMLElement($response);
     $user_id=$user_xml->user->primary_id;
@@ -52,15 +51,15 @@
         );
     $requestjson=json_encode($jsonarray);
     
-    #submit Json using cURL to Alma's 'create user request for resource sharing' function in the API
+    #submit Json to Alma's 'create user request for resource sharing' function in the API
     # https://developers.exlibrisgroup.com/alma/apis/users/POST/gwPcGly021r0XQMGAttqcPPFoLNxBoEZ48s5U7d2yuoXwmuEh++anMi4mohwnX9VTzJnp13lw54=/0aa8d36f-53d6-48ff-8996-485b90b103e4
 
-    $ch = curl_init();
     $url = $almaurl.'/almaws/v1/users/' . $user_id_url . '/resource_sharing_requests';
     $queryParams = '?' . urlencode('apikey') . '=' . urlencode($apikey);
     $fullurl = $url.$queryParams;
     
     #submit using cURL
+    #$ch = curl_init();
     #curl_setopt($ch, CURLOPT_URL, $fullurl);
     #curl_setopt($ch, CURLOPT_RETURNTRANSFER, TRUE);
     #curl_setopt($ch, CURLOPT_HEADER, FALSE);
