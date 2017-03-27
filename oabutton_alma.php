@@ -11,6 +11,10 @@
     $almaurl="https://api-eu.hosted.exlibrisgroup.com";
     $apikey="xxxxxxxxxxxxxx";
     
+    #test lines for reading from a Json file
+    #$jsondata = file_get_contents('test.json');
+    #$json = json_decode($jsondata, true);
+    
     #read Json from file POSTed by OA Button
     $json = json_decode(file_get_contents('php://input'), true);
 
@@ -43,10 +47,11 @@
     $jsonarray=array(
         'format'=>array('value'=>'DIGITAL','desc'=>'Digital'),
         'title'=>$json['title'],
-        'year'=>null,
-        'journal_title'=>null,
-        'last_interest_date'=>date("Y-m-d", strtotime("+1 week")) . "Z",
+        'year'=>'yyyy',
+        'journal_title'=>$json['journal']['title'],
+        #'last_interest_date'=>date("Y-m-d", strtotime("+1 week")) . "Z",
         'citation_type'=>array('value'=>'CR','desc'=>'Article'),
+        'note'=>'doi='.$json['doi'],
         'agree_to_copyright_terms'=>'true'
         );
     $requestjson=json_encode($jsonarray);
