@@ -40,8 +40,8 @@
     $response = file_get_contents($fullurl, null, $context);
     
     $user_xml = new SimpleXMLElement($response);
-    $user_id=$user_xml->user->primary_id;
-    $user_id_url=urlencode($user_id);
+    $user_id=$user_xml->user[0]->primary_id;
+    $user_id_url=urlencode(strtolower($user_id));
     
     #create Json for submitting to Alma
     $jsonarray=array(
