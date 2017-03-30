@@ -1,6 +1,6 @@
 <?php
-# @name: oabutton.php
-# @version: 0.3
+# @name: oabutton_alma.php
+# @version: 0.4
 # @license: GNU General Public License version 3 (GPLv3) <https://www.gnu.org/licenses/gpl-3.0.en.html>
 # @purpose: Accept data from the OA Button and submit ILL requests ("Resource Sharing Borrowing Requests")to Imperial College Library's Ex Libris Alma library management system
 # @author: Simon Barron <s.barron@imperial.ac.uk>
